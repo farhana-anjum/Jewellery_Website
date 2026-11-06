@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Farhana Anjum | Jewelry Designer Portfolio</title>
+  <style>
+    :root {
+      --ink: #2B2228;          /* body text on light backgrounds */
+      --mauve-dark: #5A2D4C;   /* headings, header background */
+      --mauve-soft: #F3E9F0;
+      --orange-dark: #9A3F00;  /* accents, readable on white */
+      --orange-soft: #FFF1E4;
+      --green-dark: #2F5D3A;   /* links, skills */
+      --green-soft: #E8F1EA;
+      --paper: #FFFFFF;
+      --page: #FFFAF5;
+      --line: #D9C7D3;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--page);
+      overflow-wrap: anywhere;
+    }
+
+    /* Skip link: hidden until focused */
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      padding: 0.75rem 1.25rem;
+      background: #FFFFFF;
+      color: var(--mauve-dark);
+      font-weight: 700;
+      border: 3px solid var(--orange-dark);
+      border-radius: 0.5rem;
+      z-index: 10;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* Visible focus for every interactive element */
+    a:focus-visible {
+      outline: 4px solid var(--orange-dark);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 7px #FFFFFF;
+    }
+
+    .wrap { width: min(100% - 2rem, 62rem); margin-inline: auto; }
+
+    /* Header and navigation */
+    .site-header { background: var(--mauve-dark); color: #FFFFFF; }
+    .site-header .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem 1.5rem;
+      padding-block: 1rem;
+    }
+    .brand { font-weight: 700; font-size: 1.125rem; }
+    .site-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .site-nav a {
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
+      color: #FFFFFF;
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+      border-radius: 0.375rem;
+    }
+    .site-nav a:hover { background: rgba(255, 255, 255, 0.18); }
+    .site-header a:focus-visible { outline-color: #FFFFFF; box-shadow: 0 0 0 7px var(--mauve-dark); }
+
+    /* Sections */
+    section { padding-block: clamp(2.5rem, 7vw, 4.5rem); scroll-margin-top: 1rem; }
+    section + section { border-top: 1px solid var(--line); }
+
+    h1, h2, h3 { color: var(--mauve-dark); line-height: 1.2; margin: 0 0 1rem; }
+    h1 { font-size: clamp(2.25rem, 7vw, 3.75rem); }
+    h2 { font-size: clamp(1.625rem, 4vw, 2.125rem); }
+    h3 { font-size: 1.25rem; }
+
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      color: var(--orange-dark);
+    }
+    .lead { font-size: 1.25rem; max-width: 40rem; margin: 0 0 1.5rem; }
+
+    /* Introduction */
+    #introduction { background: linear-gradient(180deg, var(--orange-soft), var(--page)); }
+
+    .button {
+      display: inline-block;
+      padding: 0.875rem 1.5rem;
+      background: var(--orange-dark);
+      color: #FFFFFF;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      border: 2px solid var(--orange-dark);
+    }
+    .button:hover { background: #7A3000; border-color: #7A3000; }
+
+    /* Placeholders: dashed outline plus bracketed text, so meaning is not color-only */
+    .placeholder {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border: 2px dashed var(--orange-dark);
+      border-radius: 0.375rem;
+      background: var(--orange-soft);
+      color: #6B2C00;
+      font-style: italic;
+    }
+
+    /* Projects */
+    .cards { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+    .card {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-top: 6px solid var(--mauve-dark);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+    .status {
+      margin: 0 0 1rem;
+      padding: 0.5rem 0.75rem;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: #6B2C00;
+      background: var(--orange-soft);
+      border: 2px dashed var(--orange-dark);
+      border-radius: 0.5rem;
+    }
+    .details { margin: 0; }
+    .details dt { margin-top: 0.875rem; font-weight: 700; color: var(--mauve-dark); }
+    .details dd { margin: 0.125rem 0 0; }
+
+    /* Skills */
+    .skills { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+    .skills li {
+      padding: 0.5rem 1rem;
+      background: var(--green-soft);
+      color: #1F4A2B;
+      border: 2px dashed var(--green-dark);
+      border-radius: 2rem;
+      font-style: italic;
+    }
+
+    /* About */
+    .about-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+    .panel { background: var(--mauve-soft); border-radius: 0.75rem; padding: 1.5rem; }
+    .panel h3 { margin-bottom: 0.5rem; }
+    .panel p { margin: 0; }
+
+    /* Contact */
+    .contact-list { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+    .contact-list li { background: var(--green-soft); border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .contact-label { display: block; font-weight: 700; color: #1F4A2B; }
+    .contact-list a { color: #1F4A2B; font-weight: 600; text-underline-offset: 0.2em; }
+
+    .site-footer { background: var(--mauve-dark); color: #FFFFFF; padding-block: 1.5rem; font-size: 0.9375rem; }
+    .site-footer p { margin: 0; }
+
+    @media (min-width: 48rem) {
+      .contact-list { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <span class="brand">Farhana Anjum</span>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#introduction">Introduction</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- INTRODUCTION -->
+    <section id="introduction" aria-labelledby="intro-heading">
+      <div class="wrap">
+        <p class="eyebrow">Portfolio</p>
+        <h1 id="intro-heading">Farhana Anjum</h1>
+        <p class="lead">Jewelry Designer</p>
+        <!-- REPLACE: Add a verified organization, or delete this paragraph if no organization applies. -->
+        <p><span class="placeholder">[Add verified organization, if applicable]</span></p>
+        <p><a class="button" href="#projects">View Projects</a></p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-heading">
+      <div class="wrap">
+        <h2 id="projects-heading">Projects</h2>
+        <div class="cards">
+
+          <!-- PROJECT CARD 1: Replace every placeholder with verified details, then remove the status line. -->
+          <article class="card" aria-labelledby="project-1-title">
+            <p class="status">Project details awaiting verified information.</p>
+            <h3 id="project-1-title">[Add verified project title]</h3>
+            <dl class="details">
+              <dt>Description</dt>
+              <dd>[Add verified project description]</dd>
+              <dt>My role</dt>
+              <dd>[Add verified role on this project]</dd>
+              <dt>Tools used</dt>
+              <dd>[Add verified tools]</dd>
+              <dt>Outcome</dt>
+              <dd>[Add verified outcome]</dd>
+              <dt>Proof or supporting URL</dt>
+              <!-- When verified, replace with: <a href="https://example.com/your-proof">Descriptive link text</a> -->
+              <dd>[Add verified URL]</dd>
+            </dl>
+          </article>
+
+          <!-- PROJECT CARD 2: Replace every placeholder with verified details, then remove the status line. -->
+          <article class="card" aria-labelledby="project-2-title">
+            <p class="status">Project details awaiting verified information.</p>
+            <h3 id="project-2-title">[Add verified project title]</h3>
+            <dl class="details">
+              <dt>Description</dt>
+              <dd>[Add verified project description]</dd>
+              <dt>My role</dt>
+              <dd>[Add verified role on this project]</dd>
+              <dt>Tools used</dt>
+              <dd>[Add verified tools]</dd>
+              <dt>Outcome</dt>
+              <dd>[Add verified outcome]</dd>
+              <dt>Proof or supporting URL</dt>
+              <!-- When verified, replace with: <a href="https://example.com/your-proof">Descriptive link text</a> -->
+              <dd>[Add verified URL]</dd>
+            </dl>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="wrap">
+        <h2 id="skills-heading">Skills</h2>
+        <!-- REPLACE: Swap each placeholder for a verified skill. Add or remove list items as needed. -->
+        <ul class="skills">
+          <li>[Add verified skill]</li>
+          <li>[Add verified skill]</li>
+          <li>[Add verified skill]</li>
+          <li>[Add verified skill]</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="wrap">
+        <h2 id="about-heading">About</h2>
+        <p class="lead">Farhana Anjum is a Jewelry Designer.</p>
+        <div class="about-grid">
+          <!-- REPLACE: Add a verified biography. -->
+          <div class="panel">
+            <h3>Background</h3>
+            <p>[Add verified background]</p>
+          </div>
+          <!-- REPLACE: Add verified professional interests. -->
+          <div class="panel">
+            <h3>Professional interests</h3>
+            <p>[Add verified professional interests]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="wrap">
+        <h2 id="contact-heading">Contact</h2>
+        <!-- REPLACE: When verified, wrap each value in a link, e.g.
+             <a href="mailto:name@example.com">name@example.com</a>
+             <a href="https://www.linkedin.com/in/your-profile">LinkedIn profile for Farhana Anjum</a> -->
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Email</span>
+            [farhana.anjum2lisa@gmail.com]
+          </li>
+          <li>
+            <span class="contact-label">LinkedIn</span>
+            [Add verified URL]
+          </li>
+          <li>
+            <span class="contact-label">Additional contact link (optional)</span>
+            [Add verified URL]
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; Farhana Anjum</p>
+    </div>
+  </footer>
+</body>
+</html>
